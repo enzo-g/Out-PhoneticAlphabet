@@ -9,9 +9,9 @@
 .PROJECTURI
     https://github.com/stlth/Out-PhoneticAlphabet
 .ICONURI
-.EXTERNALMODULEDEPENDENCIES 
-.REQUIREDSCRIPTS 
-.EXTERNALSCRIPTDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
+.REQUIREDSCRIPTS
+.EXTERNALSCRIPTDEPENDENCIES
 .RELEASENOTES
 .Synopsis
     Converts a string to a phonetic alphabet (NATO) pronunciation.
@@ -36,14 +36,14 @@ function Out-PhoneticAlphabet
                    Position=0)]
         [ValidateNotNull()]
         [ValidateNotNullOrEmpty()]
-        [ValidatePattern("^[0-9a-zA-Z\.\-]+$")]
+        [ValidatePattern("^[0-9a-zA-Z\.\-\]\[\(\)\@\%\;\!\\\/]+$")]
         [string[]]
         $InputObject
     )
     Begin
     {
         Write-Verbose -Message 'Listing Parameters utilized:'
-        $PSBoundParameters.GetEnumerator() | ForEach-Object -Process { Write-Verbose -Message "$($PSItem)" }
+        $PSBoundParameters.GetEnumerator() | ForEach-Object { Write-Verbose -Message "$($PSItem)" }
 
         $nato = @{
             '0'=[PSCustomObject]@{PSOutputString='(ZERO)';Pronunciation='ZEE-RO';}
@@ -84,6 +84,17 @@ function Out-PhoneticAlphabet
             'z'=[PSCustomObject]@{PSOutputString='zulu';Pronunciation='ZOO-LOO';}
             '.'=[PSCustomObject]@{PSOutputString='(POINT)';Pronunciation='POINT';}
             '-'=[PSCustomObject]@{PSOutputString='(DASH)';Pronunciation='DASH';}
+            '!'=[PSCustomObject]@{PSOutputString='(Exclamation mark)';Pronunciation='(Exclamation mark)';}
+            '('=[PSCustomObject]@{PSOutputString='(Left Round bracket)';Pronunciation='(Left Round bracket)';}
+            ')'=[PSCustomObject]@{PSOutputString='(Right Round bracket)';Pronunciation='(Right Round bracket)';}
+            '['=[PSCustomObject]@{PSOutputString='(Left Square bracket)';Pronunciation='(Left Square bracket)';}
+            ']'=[PSCustomObject]@{PSOutputString='(Right Square bracket)';Pronunciation='(Right Square bracket)';}
+            ';'=[PSCustomObject]@{PSOutputString='(Semi colon)';Pronunciation='(Semi colon)';}
+            '%'=[PSCustomObject]@{PSOutputString='(percentage)';Pronunciation='(percentage)';}
+            '@'=[PSCustomObject]@{PSOutputString='(at symbol)';Pronunciation='(at symbol)';}
+            '/'=[PSCustomObject]@{PSOutputString='(Forward Slash)';Pronunciation='(Forward Slash)';}
+            '\'=[PSCustomObject]@{PSOutputString='(Back Slash)';Pronunciation='(Back Slash)';}
+
         }
     } # END: BEGIN
     Process
@@ -123,6 +134,51 @@ function Out-PhoneticAlphabet
                             break
                         }
                         '\-'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\('
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\)'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\['
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\]'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\@'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\;'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\!'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\/'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\\'
                         {
                             $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
                             break
