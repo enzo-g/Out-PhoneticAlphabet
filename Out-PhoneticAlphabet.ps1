@@ -36,7 +36,7 @@ function Out-PhoneticAlphabet
                    Position=0)]
         [ValidateNotNull()]
         [ValidateNotNullOrEmpty()]
-        [ValidatePattern("^[0-9a-zA-Z\.\-\]\[\(\)\@\%\;\!\\\/]+$")]
+        [ValidatePattern("^[0-9a-zA-Z\.\-\]\[\(\)\@\%\;\!\\\/\,\+\=]+$")]
         [string[]]
         $InputObject
     )
@@ -94,7 +94,9 @@ function Out-PhoneticAlphabet
             '@'=[PSCustomObject]@{PSOutputString='(at symbol)';Pronunciation='(at symbol)';}
             '/'=[PSCustomObject]@{PSOutputString='(Forward Slash)';Pronunciation='(Forward Slash)';}
             '\'=[PSCustomObject]@{PSOutputString='(Back Slash)';Pronunciation='(Back Slash)';}
-
+            ','=[PSCustomObject]@{PSOutputString='(Comma)';Pronunciation='(Comma)';}
+            '+'=[PSCustomObject]@{PSOutputString='(Plus symbol)';Pronunciation='(Plus symbol)';}
+            '='=[PSCustomObject]@{PSOutputString='(Equal symbol)';Pronunciation='(Equal symbol)';}
         }
     } # END: BEGIN
     Process
@@ -179,6 +181,26 @@ function Out-PhoneticAlphabet
                             break
                         }
                         '\\'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\%'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\,'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\+'
+                        {
+                            $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
+                            break
+                        }
+                        '\='
                         {
                             $sb.Append($nato.Get_Item("$character").PSOutputString) | Out-Null
                             break
